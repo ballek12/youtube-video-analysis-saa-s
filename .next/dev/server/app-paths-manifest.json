@@ -1,0 +1,23 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/analyze/page": "app/analyze/page.js",
+  "/billing/page": "app/billing/page.js",
+  "/careers/page": "app/careers/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/cookie-policy/page": "app/cookie-policy/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/documentation/page": "app/documentation/page.js",
+  "/help-center/page": "app/help-center/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/privacy/page": "app/privacy/page.js",
+  "/profile/page": "app/profile/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/terms/page": "app/terms/page.js",
+  "/tools/script/page": "app/tools/script/page.js",
+  "/tools/thumbnail/page": "app/tools/thumbnail/page.js",
+  "/upgrade/page": "app/upgrade/page.js",
+  "/youtube-tips/page": "app/youtube-tips/page.js"
+}
