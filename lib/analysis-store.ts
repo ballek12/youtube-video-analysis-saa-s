@@ -1,6 +1,6 @@
 import type { AnalysisResult } from "./types"
 import { createClient } from "@/lib/supabase/client"
-import type { Tables } from "@/lib/supabase/database.types"
+import type { Tables, Json } from "@/lib/supabase/database.types"
 
 type AnalysisRow = Tables<"analyses">
 
@@ -35,7 +35,7 @@ export async function saveAnalysis(userId: string, url: string, result: Analysis
       video_id: result.video.id,
       video_title: result.video.title,
       thumbnail: result.video.thumbnail,
-      result: result as any,
+      result: result as Json,
     })
     .select()
     .single()

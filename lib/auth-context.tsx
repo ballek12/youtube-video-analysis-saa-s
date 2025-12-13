@@ -4,6 +4,8 @@ import { createContext, useContext, useState, useEffect, useRef, type ReactNode 
 import { createClient } from "@/lib/supabase/client"
 import type { User as SupabaseUser } from "@supabase/supabase-js"
 import type { Tables } from "@/lib/supabase/database.types"
+import type { SupabaseClient } from "@supabase/supabase-js"
+import type { Database } from "@/lib/supabase/database.types"
 
 type Profile = Tables<"profiles">
 
@@ -43,7 +45,7 @@ function mapProfileToUser(profile: Profile, supabaseUser: SupabaseUser): User {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const supabaseRef = useRef<any>(null)
+  const supabaseRef = useRef<SupabaseClient<Database> | null>(null)
 
   if (!supabaseRef.current) {
     supabaseRef.current = createClient()
@@ -53,22 +55,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      // Vérifier la session actuelle
-      supabase.auth.getSession().then(({ data: { session } }: any) => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
         if (session?.user) {
           loadUserProfile(session.user.id)
         } else {
           setIsLoading(false)
         }
-      }).catch((error: any) => {
+      }).catch((error: Error) => {
         console.error("Error getting session:", error)
         setIsLoading(false)
       })
 
-      // Écouter les changements d'authentification
       const {
         data: { subscription },
-      } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
+      } = supabase.auth.onAuthStateChange(async (event, session) => {
         if (session?.user) {
           await loadUserProfile(session.user.id)
         } else {
@@ -78,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })
 
       return () => {
-        subscription.unsubscribe()
+        subscription?.unsubscribe()
       }
     } catch (error) {
       console.error("Error initializing auth provider:", error)

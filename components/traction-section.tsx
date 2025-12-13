@@ -21,9 +21,9 @@ export function TractionSection() {
             {t.traction.trustedBy}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {logos.map((logo, index) => (
+            {logos.map((logo) => (
               <div
-                key={index}
+                key={`logo-${logo.name.toLowerCase().replace(/\s+/g, '-')}`}
                 className={`text-xl font-bold text-foreground ${logo.opacity} hover:opacity-100 transition-opacity`}
               >
                 {logo.name}

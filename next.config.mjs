@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    // Only ignore build errors in development, never in production
-    ignoreBuildErrors: process.env.NODE_ENV === 'development',
-  },
   images: {
     unoptimized: true,
   },
@@ -11,7 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   // Disable experimental features that might hide errors
   experimental: {
-    optimizePackageImports: ['@radix-ui'],
+    optimizePackageImports: ["@radix-ui"],
   },
 }
 
